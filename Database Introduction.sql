@@ -115,3 +115,67 @@ ALTER TABLE [Users]
 ADD UNIQUE ([Id])
 
 --Exercise 13
+CREATE DATABASE [Movies]
+
+USE Movies
+
+CREATE TABLE [Directors](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[DirectorName] NVARCHAR(50) NOT NULL,
+	[Notes] NVARCHAR(200)
+)
+
+CREATE TABLE [Genres](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[GenreName] NVARCHAR(50) NOT NULL,
+	[Notes] NVARCHAR(200)
+)
+
+CREATE TABLE [Categories](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[CategoryName] NVARCHAR(50) NOT NULL,
+	[Notes] NVARCHAR(200)
+)
+
+CREATE TABLE [Movies](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[Title] NVARCHAR(50) NOT NULL,
+	[DirectorId] INT FOREIGN KEY REFERENCES [Directors]([Id]),
+	[CopyrightYear] CHAR(4) NOT NULL,
+	[Length] NVARCHAR(20) NOT NULL,
+	[GenreId] INT FOREIGN KEY REFERENCES [Genres]([Id]),
+	[CategoryId] INT FOREIGN KEY REFERENCES [Categories]([Id]),
+	[Rating] NVARCHAR(20),
+	[Notes] NVARCHAR(200)
+)
+
+
+INSERT INTO [Directors]([DirectorName], [Notes])
+     VALUES ('David Fincher', 'Paul Thomas Anderson'),
+			('John Ford', 'American film director and producer'),
+			('Paul Thomas Anderson', 'American filmmaker'),
+			('Ridley Scott', 'English film director and producer'),
+			('Steven Spielberg', 'A major figure of the New Hollywood era')
+
+
+INSERT INTO [Genres]([GenreName], [Notes])
+	 VALUES ('Drama', NULL),
+			('Comedy', NULL),
+			('Fantasy', NULL),
+			('Horror', NULL),
+			('Action', NULL)
+
+
+INSERT INTO [Categories]([CategoryName], [Notes])
+	 VALUES ('Drama', NULL),
+            ('Comedy', NULL),
+			('Fantasy', NULL),
+			('Horror', NULL),
+			('Action', NULL)
+
+INSERT INTO [Movies]([Title], [DirectorId], [CopyrightYear], [Length], [GenreId], [CategoryId], [Rating], [Notes])
+	 VALUES ('The Godfather', 1 , '1972', '2 h 55 min', 1, 1, NULL, NULL),
+			('The Lord of the Rings: The Fellowship of the Ring', 2 , '2001', ' 2 h 58 min', 2, 2, NULL, NULL),
+			('12 Angry Men', 3 , '1957', '1 h 36 min', 3, 3, NULL, NULL),
+			('Avatar', 4 , '2009', '2 h 42 min', 4, 4, NULL, NULL),
+			('The Matrix', 5 , '1999', '2 h 16 min', 5, 5, NULL, NULL)
