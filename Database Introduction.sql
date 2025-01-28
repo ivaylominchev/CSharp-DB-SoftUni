@@ -101,3 +101,12 @@ CHECK(LEN([Password]) >= 5)
 ALTER TABLE [Users]
 ADD CONSTRAINT [DF_LastLoginTime_Current_time]
 DEFAULT GETDATE() FOR [LastLoginTime]
+
+
+--Exercise 12
+ALTER TABLE [Users]
+DROP CONSTRAINT [PK_Id_Username]
+
+ALTER TABLE [Users]
+ADD CONSTRAINT [PK_Id]
+PRIMARY KEY ([Id])
