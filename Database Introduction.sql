@@ -186,3 +186,93 @@ INSERT INTO [Movies]([Title], [DirectorId], [CopyrightYear], [Length], [GenreId]
 CREATE DATABASE [CarRental]
 
 USE CarRental
+
+CREATE TABLE [Categories](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[CategoryName] NVARCHAR(100) NOT NULL ,
+	[DailyRate] INT,
+	[WeeklyRate] INT,
+	[MonthlyRate] INT,
+	[WeekendRate] INT
+)
+
+CREATE TABLE [Cars](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[PlateNumber] NVARCHAR(10) NOT NULL,
+	[Manufacturer] NVARCHAR(100) NOT NULL,
+	[Model] NVARCHAR(100) NOT NULL,
+	[CarYear] CHAR(4) NOT NULL,
+	[CategoryId] INT FOREIGN KEY REFERENCES [Categories]([Id]),
+	[Doors] TINYINT,
+	[Picture] VARBINARY(MAX),
+	[Condition] NVARCHAR(100),
+	[Available] BIT,
+)
+
+CREATE TABLE [Employees](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[FirstName] NVARCHAR(50) NOT NULL,
+	[LastName] NvARCHAR(50) NOT NULL,
+	[Title] NVARCHAR(50) NOT NULL,
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [Customers](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[DriverLicenceNumber] NCHAR(9) NOT NULL,
+	[FullName] NVARCHAR(100) NOT NULL,
+	[Address] NVARCHAR(100),
+	[City] NVARCHAR(100),
+	[ZIPCode] CHAR(4),
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [RentalOrders](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[EmployeeId] INT FOREIGN KEY REFERENCES [Employees]([Id]),
+	[CustomerId] INT FOREIGN KEY REFERENCES [Customers]([Id]),
+	[CarId] INT FOREIGN KEY REFERENCES [Cars]([Id]),
+	[TankLevel] INT,
+	[KilometrageStart] INT,
+	[KilometrageEnd] INT,
+	[TotalKilometrage] INT,
+	[StartDate] DATETIME2,
+	[EndDate] DATETIME2,
+	[TotalDays] SMALLINT,
+	[RateApplied] NVARCHAR(20),
+	[TaxRate] NVARCHAR(15),
+	[OrderStatus] NVARCHAR(15),
+	[Notes] NVARCHAR(100),
+)
+
+INSERT INTO [Categories]([CategoryName], [DailyRate], [WeeklyRate], [MonthlyRate], [WeekendRate]) 
+	 VALUES ('Car', 10, 70, 310, 20),
+			('Bus', 20, 140, 620, 40),
+			('Truck', 30, 210, 930, 60)
+
+
+INSERT INTO [Cars]([PlateNumber], [Manufacturer], [Model], [CarYear], [CategoryId], [Doors], [Picture], [Condition], [Available])
+     VALUES ('H 7293 BH', 'OPEL', 'CORSA', '2011', 2, 4, NULL, NULL, NULL),
+			('BH 7583 BA', 'VW', 'GOLF', '2001', 1, 2, NULL, NULL, NULL),
+			('A 1785 KA', 'TOYOTA', 'COROLLA', '2025', 3, 4, NULL, NULL, NULL)
+
+
+INSERT INTO [Employees]([FirstName], [LastName], [Title], [Notes])
+	 VALUES ('Ana', 'Ivanova', 'CEO', NULL),
+			('Ivan', 'Petrov', 'Web Developer', NULL),
+			('Sisa', 'Stoyanova', 'Vet', NULL)
+
+
+INSERT INTO [Customers] ([DriverLicenceNumber], [FullName], [Address], [City], [ZIPCode], [Notes])
+	 VALUES ('203245789', 'Jane Haris', 'Knqz Boris 2', 'Varna', '9000', NULL),
+			('903247789', 'Anna Stoicheva', 'Marica 22', 'Shumen', '9700', NULL),
+			('273245139', 'Sava Savov', 'Ruja Teneva 12', 'Sofia', '1789', NULL)
+
+
+INSERT INTO [RentalOrders] ([EmployeeId], [CustomerId], [CarId], [TankLevel], [KilometrageStart],
+[KilometrageEnd], [TotalKilometrage], [StartDate], [EndDate], [TotalDays], [RateApplied], [TaxRate],
+[OrderStatus], [Notes]) 
+	 VALUES (1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+			(2, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+			(3, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+
