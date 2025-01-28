@@ -1,2 +1,17 @@
 --Exercise 01
-CREATE DATABASE Minions
+CREATE DATABASE [Minions]
+
+--Exercise 02
+USE Minions
+CREATE TABLE [Minions]
+(	
+	[Id] INT PRIMARY KEY IDENTITY(1, 1) NOT NULL,
+	[Name] NVARCHAR(50) NOT NULL,
+	[Age] INT
+)
+
+CREATE TABLE [Towns]
+(
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[Name] NVARCHAR(85) NOT NULL
+)
