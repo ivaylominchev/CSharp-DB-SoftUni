@@ -351,3 +351,44 @@ CREATE TABLE [Occupancies](
 	[Notes] NVARCHAR(100)
 )
 
+INSERT INTO	[Employees] ([FirstName], [LastName], [Title], [Notes] )
+	 VALUES ('Anna', 'Petrova', 'CEO', NULL),
+			('Sofi', 'Ivanova', 'Web Developer', NULL),
+			('Petar', 'Petrov', 'Vet', NULL)
+
+INSERT INTO [Customers]([AccountNumber], [FirstName], [LastName], 
+[PhoneNumber], [EmergencyName], [EmergencyNumber], [Notes])
+	 VALUES ('1234567','Geri', 'IVANOVA', '1214567451', NULL, NULL, NULL),
+			('1837563', 'Geri', 'PETROVA', '1239567897', NULL, NULL, NULL),
+			('9234548', 'Geri', 'STOYANOVA', '1234577896', NULL, NULL, NULL)
+
+INSERT INTO [RoomStatus] ([Notes])
+	 VALUES (NULL),
+			(NULL),
+			(NULL)
+
+INSERT INTO [RoomTypes] ([Notes])
+	 VALUES (NULL),
+			(NULL),
+			(NULL)
+
+INSERT INTO [BedTypes] ([Notes])
+	 VALUES (NULL),
+			(NULL),
+			(NULL)
+
+INSERT INTO [Rooms]([Rate],[Notes])
+	 VALUES ('5 STARS', NULL),
+			('5 STARS', NULL),
+			('5 STARS', NULL)
+
+INSERT INTO [Payments]([PaymentDate], [AccountNumber], [FirstDateOccupied], 
+	[LastDateOccupied], [TotalDays], [AmountCharged], [TaxRate], [TaxAmount], [PaymentTotal], [Notes])
+	 VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+			(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+			(NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+
+INSERT INTO [Occupancies]([DateOccupied], [AccountNumber], [RateApplied], [PhoneCharge], [Notes])
+	 VALUES (NULL, NULL, NULL, NULL, NULL),
+			( NULL, NULL, NULL, NULL, NULL),
+			(NULL, NULL, NULL, NULL, NULL)
