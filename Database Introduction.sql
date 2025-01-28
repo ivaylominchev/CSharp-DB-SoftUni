@@ -440,3 +440,7 @@ UPDATE [Payments]
 
 SELECT [TaxRate]
   FROM [Payments]
+
+
+--Exercise 24
+TRUNCATE TABLE [Occupancies]
