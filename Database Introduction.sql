@@ -276,3 +276,78 @@ INSERT INTO [RentalOrders] ([EmployeeId], [CustomerId], [CarId], [TankLevel], [K
 			(2, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 			(3, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 
+
+--Exercise 15
+CREATE DATABASE [Hotel]
+
+USE Hotel
+
+CREATE TABLE [Employees](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[FirstName] NVARCHAR(100) NOT NULL,
+	[LastName] NVARCHAR(100) NOT NULL,
+	[Title] NVARCHAR(100),
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [Customers](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[AccountNumber] CHAR(10),
+	[FirstName] NVARCHAR(100) NOT NULL,
+	[LastName] NVARCHAR(100) NOT NULL,
+	[PhoneNumber] CHAR(10),
+	[EmergencyName] NVARCHAR(50),
+	[EmergencyNumber] CHAR(10),
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [RoomStatus](
+	[RoomStatus] INT PRIMARY KEY IDENTITY NOT NULL,
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [RoomTypes](
+	[RoomType] INT PRIMARY KEY IDENTITY NOT NULL,
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [BedTypes](
+	[BedType] INT PRIMARY KEY IDENTITY NOT NULL,
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [Rooms](
+	[RoomNumber] INT PRIMARY KEY IDENTITY NOT NULL,
+	[RoomType] INT FOREIGN KEY REFERENCES [RoomTypes]([RoomType]),
+	[BedType] INT FOREIGN KEY REFERENCES [BedTypes]([BedType]),
+	[Rate] CHAR(7),
+	[RoomStatus] INT FOREIGN KEY REFERENCES [RoomStatus]([RoomStatus]),
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [Payments](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[EmployeeId] INT FOREIGN KEY REFERENCES [Employees]([Id]),
+	[PaymentDate] DATETIME2,
+	[AccountNumber] CHAR(10),
+	[FirstDateOccupied] DATETIME2,
+	[LastDateOccupied] DATETIME2,
+	[TotalDays] INT,
+	[AmountCharged] INT,
+	[TaxRate] INT,
+	[TaxAmount] INT,
+	[PaymentTotal] MONEY,
+	[Notes] NVARCHAR(100)
+)
+
+CREATE TABLE [Occupancies](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[EmployeeId] INT FOREIGN KEY REFERENCES [Employees]([Id]),
+	[DateOccupied] DATETIME2,
+	[AccountNumber] CHAR(10),
+	[RoomNumber] INT FOREIGN KEY REFERENCES [Rooms]([RoomNumber]),
+	[RateApplied] NVARCHAR(50),
+	[PhoneCharge] NVARCHAR(50),
+	[Notes] NVARCHAR(100)
+)
+
