@@ -179,3 +179,10 @@ INSERT INTO [Movies]([Title], [DirectorId], [CopyrightYear], [Length], [GenreId]
 			('12 Angry Men', 3 , '1957', '1 h 36 min', 3, 3, NULL, NULL),
 			('Avatar', 4 , '2009', '2 h 42 min', 4, 4, NULL, NULL),
 			('The Matrix', 5 , '1999', '2 h 16 min', 5, 5, NULL, NULL)
+
+
+--Exercise 14
+
+CREATE DATABASE [CarRental]
+
+USE CarRental
