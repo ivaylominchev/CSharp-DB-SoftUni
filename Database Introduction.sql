@@ -3,15 +3,13 @@ CREATE DATABASE [Minions]
 
 --Exercise 02
 USE Minions
-CREATE TABLE [Minions]
-(	
+CREATE TABLE [Minions](	
 	[Id] INT PRIMARY KEY NOT NULL,
 	[Name] NVARCHAR(50) NOT NULL,
 	[Age] INT
 )
 
-CREATE TABLE [Towns]
-(
+CREATE TABLE [Towns](
 	[Id] INT PRIMARY KEY NOT NULL,
 	[Name] NVARCHAR(85) NOT NULL
 )
@@ -45,3 +43,22 @@ TRUNCATE TABLE [Minions]
 DROP TABLE [Minions]
 DROP TABLE [Towns]
 
+
+--Exercise 07
+CREATE TABLE [People](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[Name] NVARCHAR(200) NOT NULL,
+	[Picture] VARBINARY(MAX),
+	[Height] DECIMAL(18,2),
+	[Weight] DECIMAL(18,2),
+	[Gender] NCHAR(1) NOT NULL,
+	[Birthdate] DATETIME2 NOT NULL,
+	[Biography] NVARCHAR(MAX)
+)
+
+INSERT INTO [People]([Name], [Picture], [Height], [Weight], [Gender], [Birthdate], [Biography])
+VALUES ('Ivan', NULL, 1.86, 77, 'm', '12/10/2003', 'description'),
+	   ('Gosho', NULL, 1.76, 65, 'm', '1/6/2002', 'description'),
+	   ('Geri', NULL, 1.66, 55, 'f', '6/4/2003', 'description'),
+	   ('Ivo', NULL, 1.76, 69, 'm', '1/6/2003', 'description'),
+	   ('Niki', NULL, 1.68, 50, 'm', '1/7/2001', 'description')
