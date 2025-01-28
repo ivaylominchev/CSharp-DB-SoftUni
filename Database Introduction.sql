@@ -57,8 +57,26 @@ CREATE TABLE [People](
 )
 
 INSERT INTO [People]([Name], [Picture], [Height], [Weight], [Gender], [Birthdate], [Biography])
-VALUES ('Ivan', NULL, 1.86, 77, 'm', '12/10/2003', 'description'),
-	   ('Gosho', NULL, 1.76, 65, 'm', '1/6/2002', 'description'),
-	   ('Geri', NULL, 1.66, 55, 'f', '6/4/2003', 'description'),
-	   ('Ivo', NULL, 1.76, 69, 'm', '1/6/2003', 'description'),
-	   ('Niki', NULL, 1.68, 50, 'm', '1/7/2001', 'description')
+	 VALUES ('Ivan', NULL, 1.86, 77, 'm', '12/10/2003', 'description'),
+	        ('Gosho', NULL, 1.76, 65, 'm', '1/6/2002', 'description'),
+			('Geri', NULL, 1.66, 55, 'f', '6/4/2003', 'description'),
+			('Ivo', NULL, 1.76, 69, 'm', '1/6/2003', 'description'),
+			('Niki', NULL, 1.68, 50, 'm', '1/7/2001', 'description')
+
+
+--Exercise 08
+CREATE TABLE [Users](
+	[Id] BIGINT PRIMARY KEY IDENTITY NOT NULL,
+	[Username] VARCHAR(30) NOT NULL,
+	[Password] VARCHAR(26) NOT NULL,
+	[ProfilePicture] VARBINARY(MAX),
+	[LastLoginTime] DATETIME2,
+	[IsDeleted] BIT
+)
+
+INSERT INTO [Users]([Username], [Password], [ProfilePicture], [LastLoginTime], [IsDeleted])
+	 VALUES ('Ivo', '123456', NULL, GETDATE(), NULL),
+	        ('Gosho', '12345', NULL, GETDATE(), NULL),
+			('Geri', '1234', NULL, GETDATE(), NULL),
+			('Niki', '123', NULL, GETDATE(), NULL),
+			('Vlado', '12', NULL, GETDATE(), NULL)
