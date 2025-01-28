@@ -15,3 +15,11 @@ CREATE TABLE [Towns]
 	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
 	[Name] NVARCHAR(85) NOT NULL
 )
+
+--Exercise 03
+ALTER TABLE [Minions]
+ADD [TownId] INT 
+
+ALTER TABLE [Minions]
+ADD CONSTRAINT [FK_Minions_Towns_Id]
+FOREIGN KEY ([Id]) REFERENCES [Towns]([Id])
