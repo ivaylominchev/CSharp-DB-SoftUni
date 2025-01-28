@@ -40,3 +40,8 @@ INSERT INTO [Minions]([Id], [Name], [Age], [TownId])
 --Exercise 05
 TRUNCATE TABLE [Minions]
 
+
+--Exercise 06
+DROP TABLE [Minions]
+DROP TABLE [Towns]
+
