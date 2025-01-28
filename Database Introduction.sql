@@ -80,3 +80,12 @@ INSERT INTO [Users]([Username], [Password], [ProfilePicture], [LastLoginTime], [
 			('Geri', '1234', NULL, GETDATE(), NULL),
 			('Niki', '123', NULL, GETDATE(), NULL),
 			('Vlado', '12', NULL, GETDATE(), NULL)
+
+
+--Exercise 09
+ALTER TABLE [Users]
+DROP CONSTRAINT [PK__Users__3214EC07AF944265]
+
+ALTER TABLE [Users]
+ADD CONSTRAINT [PK_Id_Username]
+PRIMARY KEY ([Id],[Username])
