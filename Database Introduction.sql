@@ -36,3 +36,7 @@ INSERT INTO [Minions]([Id], [Name], [Age], [TownId])
 			(2, 'Bob', 15, 3),
 			(3, 'Steward', NULL, 2)
 
+
+--Exercise 05
+TRUNCATE TABLE [Minions]
+
