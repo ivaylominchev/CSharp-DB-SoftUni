@@ -424,3 +424,11 @@ ORDER BY [Name] ASC
   SELECT [FirstName], [LastName], [JobTitle], [Salary]
     FROM [Employees]
 ORDER BY [Salary] DESC
+
+
+--Exercise 22
+UPDATE [Employees]
+   SET Salary *= 1.10
+
+SELECT [Salary]
+  FROM [Employees]
