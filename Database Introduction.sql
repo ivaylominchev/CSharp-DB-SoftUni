@@ -89,3 +89,9 @@ DROP CONSTRAINT [PK__Users__3214EC07AF944265]
 ALTER TABLE [Users]
 ADD CONSTRAINT [PK_Id_Username]
 PRIMARY KEY ([Id],[Username])
+
+
+--Exercise 10
+ALTER TABLE [Users]
+ADD CONSTRAINT [CK_Password_Min_Length_5]
+CHECK(LEN([Password]) >= 5)
