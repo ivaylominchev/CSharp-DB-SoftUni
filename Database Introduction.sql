@@ -432,3 +432,11 @@ UPDATE [Employees]
 
 SELECT [Salary]
   FROM [Employees]
+
+
+ --Exercise 23
+UPDATE [Payments]
+   SET [TaxRate] *=0.97
+
+SELECT [TaxRate]
+  FROM [Payments]
