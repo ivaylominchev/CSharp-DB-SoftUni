@@ -110,3 +110,8 @@ DROP CONSTRAINT [PK_Id_Username]
 ALTER TABLE [Users]
 ADD CONSTRAINT [PK_Id]
 PRIMARY KEY ([Id])
+
+ALTER TABLE [Users]
+ADD UNIQUE ([Id])
+
+--Exercise 13
