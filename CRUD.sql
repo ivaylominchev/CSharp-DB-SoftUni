@@ -14,3 +14,8 @@ SELECT [FirstName], [LastName], [Salary]
 --Task 5
 SELECT [FirstName], [MiddleName], [LastName]
   FROM [Employees]
+
+--Task 6
+SELECT CONCAT([FirstName],'.', [LastName], '@softuni.bg')
+	AS [Full Email Address]
+  FROM [Employees]
