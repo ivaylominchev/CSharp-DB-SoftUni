@@ -155,3 +155,9 @@ SELECT TOP(30) [CountryName],
     FROM [Countries]
 ORDER BY [CountryName] ASC
 
+--Task 25
+USE [Diablo]
+
+  SELECT [Name]
+    FROM [Characters]
+ORDER BY [Name] ASC
