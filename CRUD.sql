@@ -60,3 +60,9 @@ SELECT [FirstName],
   FROM [Employees]
  WHERE [Salary] > 50000
  ORDER BY [Salary] DESC
+
+--Task 13
+SELECT TOP(5) [FirstName],
+              [LastName]
+         FROM [Employees]
+     ORDER BY [Salary] DESC
