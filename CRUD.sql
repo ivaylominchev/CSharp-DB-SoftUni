@@ -23,3 +23,8 @@ SELECT CONCAT([FirstName],'.', [LastName], '@softuni.bg')
 --Task 7
 SELECT DISTINCT [Salary]
   FROM [Employees]
+
+--Task 8
+SELECT *
+  FROM [Employees]
+ WHERE [JobTitle] = 'Sales Representative'
