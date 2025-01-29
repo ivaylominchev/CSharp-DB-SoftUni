@@ -8,11 +8,15 @@ SELECT [Name]
   FROM [Departments]
 
 --Task 4
-SELECT [FirstName], [LastName], [Salary]
+SELECT [FirstName], 
+       [LastName],
+	   [Salary]
   FROM [Employees]
 
 --Task 5
-SELECT [FirstName], [MiddleName], [LastName]
+SELECT [FirstName],
+       [MiddleName],
+	   [LastName]
   FROM [Employees]
 
 --Task 6
@@ -22,7 +26,8 @@ SELECT CONCAT([FirstName],'.', [LastName], '@softuni.bg')
 
 --Task 7
 SELECT DISTINCT [Salary]
-  FROM [Employees]
+		     AS [Salary]
+           FROM [Employees]
 
 --Task 8
 SELECT *
@@ -30,6 +35,14 @@ SELECT *
  WHERE [JobTitle] = 'Sales Representative'
 
 --Task 9
-SELECT [FirstName], [LastName], [JobTitle]
+SELECT [FirstName],
+       [LastName],
+       [JobTitle]
   FROM [Employees]
  WHERE [Salary] BETWEEN 20000 AND 30000
+
+--Task 10
+SELECT CONCAT_WS(' ', [FirstName], [MiddleName], [LastName])
+	AS [Full Name]
+  FROM [Employees]
+ WHERE [Salary] IN (25000, 14000, 12500, 23600)
