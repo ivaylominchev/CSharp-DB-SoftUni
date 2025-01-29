@@ -38,6 +38,8 @@ ADD CONSTRAINT [FK_Persons_Passports_PassportID]
    FOREIGN KEY ([PassportID]) 
     REFERENCES [Passports]([PassportID])
 
+   ALTER TABLE [Persons]
+ADD CONSTRAINT [UQ_Person_PassportID] UNIQUE([PassportID])
 --Task 2
 
 CREATE TABLE [Manufacturers](
@@ -64,4 +66,39 @@ INSERT INTO [Models]([ModelID], [Name], [ManufacturerID])
 			(104, 'Model X', 2),
 			(105, 'Model 3', 2),
 			(106, 'Nova', 3)
+
+--Task 3
+CREATE TABLE [Students](
+	[StudentID] INT PRIMARY KEY NOT NULL,
+	[Name] VARCHAR(64)
+)
+
+CREATE TABLE [Exams](
+	[ExamID] INT PRIMARY KEY NOT NULL,
+	[Name] VARCHAR(64)
+)
+
+CREATE TABLE [StudentsExams](
+	[StudentID] INT FOREIGN KEY REFERENCES [Students]([StudentID]),
+	[ExamID] INT FOREIGN KEY REFERENCES [Exams]([ExamID]),
+	CONSTRAINT [PK_StudentsExams] PRIMARY KEY ([StudentID], [ExamID])
+)
+
+INSERT INTO [Students]([StudentID], [Name])
+     VALUES (1, 'Mila'),
+	        (2, 'Toni'),
+	        (3, 'Ron')
+
+INSERT INTO [Exams]([ExamID], [Name])
+     VALUES (101, 'SpringMVC'),
+	        (102, 'Neo4j'),
+	        (103, 'Oracle 11g')
+
+INSERT INTO [StudentsExams]([StudentID], [ExamID])
+     VALUES (1, 101),
+			(1, 102),
+			(2, 101),
+			(3, 103),
+			(2, 102),
+			(2, 103)
 
