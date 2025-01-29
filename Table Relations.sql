@@ -117,3 +117,38 @@ INSERT INTO [Teachers]([TeacherID], [Name], [ManagerID])
 			(105, 'Mark', 101),
 			(106, 'Greta', 101)
 
+--Task 5
+CREATE TABLE [Cities](
+	[CityID] INT PRIMARY KEY NOT NULL,
+	[Name] VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE [Customers](
+	[CustomerID] INT PRIMARY KEY NOT NULL,
+	[Name] VARCHAR(100) NOT NULL,
+	[Birthday] DATETIME2,
+	[CityID] INT FOREIGN KEY REFERENCES [Cities]([CityID])
+)
+
+CREATE TABLE [Orders](
+	[OrderID] INT PRIMARY KEY NOT NULL,
+	[CustomerID] INT FOREIGN KEY REFERENCES [Customers]([CustomerID])
+)
+
+CREATE TABLE [ItemTypes](
+	[ItemTypeID] INT PRIMARY KEY NOT NULL,
+	[Name] VARCHAR(100) NOT NULL
+)
+
+CREATE TABLE [Items](
+	[ItemID] INT PRIMARY KEY NOT NULL,
+	[Name] VARCHAR(100) NOT NULL,
+	[ItemTypeID] INT FOREIGN KEY REFERENCES [ItemTypes]([ItemTypeID])
+)
+
+CREATE TABLE [OrderItems](
+	[OrderID] INT FOREIGN KEY REFERENCES [Orders]([OrderID]),
+	[ItemID] INT FOREIGN KEY REFERENCES [Items]([ItemID]),
+	CONSTRAINT [PK_OrderItems] PRIMARY KEY([OrderID], [ItemID])
+)
+
