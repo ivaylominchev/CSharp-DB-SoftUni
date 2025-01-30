@@ -30,3 +30,9 @@ SELECT [FirstName],
    WHERE LEN([Name]) IN(5, 6)
 ORDER BY [Name] ASC
 
+--Task 6
+  SELECT *
+    FROM [Towns]
+   WHERE [Name] LIKE '[MKBE]%'
+ORDER BY [Name] ASC
+
