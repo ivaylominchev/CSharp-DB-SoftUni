@@ -42,3 +42,12 @@ ORDER BY [Name] ASC
    WHERE [Name] NOT LIKE '[RBD]%'
 ORDER BY [Name] ASC
 
+--Task8
+CREATE VIEW [V_EmployeesHiredAfter2000]
+	     AS (
+			  SELECT [FirstName],
+                     [LastName]
+                FROM [Employees]
+               WHERE DATEPART(YEAR, [HireDate]) > 2000
+		    )
+
