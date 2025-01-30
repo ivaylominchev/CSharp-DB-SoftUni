@@ -36,3 +36,9 @@ ORDER BY [Name] ASC
    WHERE [Name] LIKE '[MKBE]%'
 ORDER BY [Name] ASC
 
+--Task 7
+  SELECT *
+    FROM [Towns]
+   WHERE [Name] NOT LIKE '[RBD]%'
+ORDER BY [Name] ASC
+
