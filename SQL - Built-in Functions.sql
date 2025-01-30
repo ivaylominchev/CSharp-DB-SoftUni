@@ -57,3 +57,13 @@ SELECT [FirstName],
   FROM [Employees]
  WHERE LEN([LastName]) = 5
 
+--Task 10
+  SELECT [EmployeeID],
+         [FirstName],
+         [Lastname],
+	     [Salary],
+	     DENSE_RANK() OVER(PARTITION BY [Salary] ORDER BY [EmployeeID])
+	  AS [Rank]
+    FROM [Employees]
+   WHERE [Salary] BETWEEN 10000 AND 50000
+ORDER BY [Salary] DESC
