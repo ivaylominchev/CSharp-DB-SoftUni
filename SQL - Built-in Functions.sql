@@ -18,3 +18,9 @@ SELECT [FirstName]
  WHERE [DepartmentID] IN(3, 10) AND 
        DATEPART(YEAR, [HireDate]) BETWEEN 1995 AND 2005
 
+--Task 4
+SELECT [FirstName],
+	   [LastName]
+  FROM [Employees]
+ WHERE CHARINDEX('engineer', [JobTitle]) = 0
+
