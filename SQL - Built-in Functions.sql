@@ -134,3 +134,11 @@ SELECT TOP(50) [Name],
 ORDER BY [Email Provider] ASC,
          [Username] ASC
 
+--Task 16
+  SELECT [Username],
+         [IpAddress]
+      AS [IP Address]
+    FROM [Users]
+   WHERE PATINDEX('___.1%.%.___', [IpAddress]) = 1
+ORDER BY [Username] ASC
+
