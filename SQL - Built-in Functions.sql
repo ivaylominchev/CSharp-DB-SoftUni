@@ -92,7 +92,7 @@ USE [Geography]
    WHERE [CountryName] LIKE '%a%a%a%'
 ORDER BY [IsoCode]
 
---Task 13
+--Task 13 I
   SELECT [p].[PeakName],
          [r].[RiverName],
 	     LOWER(CONCAT(SUBSTRING([p].[PeakName], 1, LEN([p].[PeakName]) - 1), [r].[RiverName]))
@@ -103,4 +103,16 @@ ORDER BY [IsoCode]
       AS [r] 
 	  ON RIGHT([p].[PeakName], 1) = LEFT([r].[RiverName], 1)
 ORDER BY [Mix]
+
+--Task 13 II
+  SELECT [p].[PeakName],
+         [r].[RiverName],
+		 LOWER(CONCAT(SUBSTRING([p].[PeakName], 1, LEN([p].[PeakName]) - 1), [r].[RiverName]))
+	  AS [Mix]
+    FROM [Peaks]
+      AS [p],
+	     [Rivers]
+	  AS [r]
+   WHERE RIGHT([p].[PeakName], 1) = LEFT([r].[RiverName], 1)
+ORDER BY [Mix] ASC
 
