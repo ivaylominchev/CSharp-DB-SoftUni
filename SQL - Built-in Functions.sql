@@ -116,3 +116,13 @@ ORDER BY [Mix]
    WHERE RIGHT([p].[PeakName], 1) = LEFT([r].[RiverName], 1)
 ORDER BY [Mix] ASC
 
+USE [Diablo]
+--Task 14
+SELECT TOP(50) [Name],
+               FORMAT([Start],'yyyy-MM-dd')
+			AS [Start]
+          FROM [Games]
+		 WHERE DATEPART(YEAR, [Start]) IN(2011, 2012)
+	  ORDER BY [Start] ASC,
+	           [Name] ASC
+
