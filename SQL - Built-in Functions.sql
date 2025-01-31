@@ -83,3 +83,12 @@ ORDER BY [Salary] DESC
    WHERE [Salary] BETWEEN 10000 AND 50000 AND [e].[Rank] = 2
 ORDER BY [Salary] DESC
 
+--Task 12
+USE [Geography]
+
+  SELECT [CountryName] AS [Country Name],
+         [IsoCode] AS [ISO Code]
+    FROM [Countries]
+   WHERE [CountryName] LIKE '%a%a%a%'
+ORDER BY [IsoCode]
+
