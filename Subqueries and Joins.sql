@@ -113,3 +113,21 @@ INNER JOIN [Projects]
        AND [p].[EndDate] IS NULL
   ORDER BY [ep].[EmployeeID] ASC
 
+--Problem 08
+    SELECT [ep].[EmployeeID],
+           [e].[FirstName],
+           CASE
+                WHEN DATEPART(YEAR, [p].[StartDate]) >= 2005 THEN NULL
+                ELSE [p].[Name]
+           END
+        AS [ProjectName]
+      FROM [EmployeesProjects]
+        AS [ep]
+INNER JOIN [Employees]
+        AS [e]
+        ON [ep].[EmployeeID] = [e].[EmployeeID]
+INNER JOIN [Projects]
+        AS [p]
+        ON [ep].[ProjectID] = [p].[ProjectID]
+     WHERE [ep].[EmployeeID] = 24
+
