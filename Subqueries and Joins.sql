@@ -164,3 +164,16 @@ LEFT JOIN [Departments]
        ON [e1].[DepartmentID] = [d].[DepartmentID]
  ORDER BY [e1].[EmployeeID] ASC
 
+--Problem 11
+SELECT MIN([a].[AverageSalary])
+    AS [MinAverageSalary]
+  FROM (
+          SELECT [e].[DepartmentID],
+                 AVG([e].[Salary])
+              AS [AverageSalary]
+            FROM [Employees]
+              AS [e]
+        GROUP BY [e].[DepartmentID]
+       )
+    AS [a]
+
