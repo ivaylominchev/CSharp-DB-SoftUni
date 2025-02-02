@@ -250,3 +250,17 @@ LEFT JOIN [Rivers]
    WHERE [Rank] = 1
 ORDER BY [ContinentCode] ASC
 
+--Problem 16
+SELECT COUNT(*)
+    AS [Count]
+  FROM (
+             SELECT [c].[CountryName],
+                    [m].[MountainId]
+               FROM [Countries]
+                 AS [c]
+          LEFT JOIN [MountainsCountries]
+                 AS [m]
+                 ON [c].[CountryCode] = [m].[CountryCode]
+              WHERE [m].[MountainId] IS NULL
+       )
+    AS [TempTable]
