@@ -194,3 +194,14 @@ LEFT JOIN [Peaks]
     WHERE [mc].[CountryCode] = 'BG' AND [p].[Elevation] > 2835
  ORDER BY [p].[Elevation] DESC
 
+ --Problem 13
+   SELECT [c].[CountryCode],
+          COUNT([mc].[MountainId])
+       AS [MountainRanges]
+     FROM [Countries]
+       AS [c]
+LEFT JOIN [MountainsCountries]
+       AS [mc]
+       ON [mc].[CountryCode] = [c].[CountryCode]
+    WHERE [c].[CountryCode] IN ('US', 'RU', 'BG')
+ GROUP BY [c].[CountryCode]
