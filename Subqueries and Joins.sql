@@ -221,3 +221,32 @@ LEFT JOIN [Rivers]
        ON [cr].[RiverId] = [r].[Id]
     WHERE [c].[ContinentCode] = 'AF'
  ORDER BY [c].[CountryName] ASC
+
+ --Problem 15
+  SELECT [ContinentCode],
+         [CurrencyCode],
+         [CurrencyUsage]
+    FROM (
+           SELECT *,
+                  DENSE_RANK() OVER (PARTITION BY [ContinentCode] ORDER BY [CurrencyUsage] DESC)
+               AS [Rank]
+             FROM (
+                    SELECT [cn].[ContinentCode],
+                           [c].[CurrencyCode],
+                           COUNT([c].[CurrencyCode])
+                        AS [CurrencyUsage]
+                      FROM [Continents] 
+                        AS [cn]
+                 LEFT JOIN [Countries] 
+                        AS [c]
+                        ON [cn].[ContinentCode] = [c].[ContinentCode]
+                  GROUP BY [cn].[ContinentCode], 
+                           [c].[CurrencyCode]
+                    HAVING COUNT([c].[CurrencyCode]) > 1
+                  )
+               AS [CurrencyUsageTempTable]
+         )
+      AS [CurrencyRankingTempTable]
+   WHERE [Rank] = 1
+ORDER BY [ContinentCode] ASC
+
