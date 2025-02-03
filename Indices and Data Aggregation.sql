@@ -29,3 +29,10 @@ GROUP BY [DepositGroup]
 GROUP BY [DepositGroup]
 ORDER BY AVG([MagicWandSize]) ASC
 
+--Problem 05
+  SELECT [DepositGroup],
+         SUM([DepositAmount])
+      AS [TotalSum]
+    FROM [WizzardDeposits]
+GROUP BY [DepositGroup]
+
