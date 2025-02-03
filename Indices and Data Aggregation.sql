@@ -14,3 +14,10 @@ SELECT MAX([MagicWandSize])
     AS [LongestMagicWand]
   FROM [WizzardDeposits]
 
+--Problem 03
+  SELECT [DepositGroup],
+         MAX([MagicWandSize])
+      AS [LongestMagicWand]
+    FROM [WizzardDeposits]
+GROUP BY [DepositGroup]
+
