@@ -21,3 +21,11 @@ SELECT MAX([MagicWandSize])
     FROM [WizzardDeposits]
 GROUP BY [DepositGroup]
 
+--Problem 04
+  SELECT 
+     TOP (2)
+         [DepositGroup]
+    FROM [WizzardDeposits]
+GROUP BY [DepositGroup]
+ORDER BY AVG([MagicWandSize]) ASC
+
