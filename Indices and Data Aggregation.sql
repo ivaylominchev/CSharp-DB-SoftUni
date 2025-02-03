@@ -54,3 +54,14 @@ GROUP BY [DepositGroup]
   HAVING SUM([DepositAmount]) < 150000
 ORDER BY [TotalSum] DESC
 
+--Problem 08
+  SELECT [DepositGroup],
+         [MagicWandCreator],
+         MIN([DepositCharge])
+      AS [MinDepositCharge]
+    FROM [WizzardDeposits]
+GROUP BY [DepositGroup],
+         [MagicWandCreator]
+ORDER BY [MagicWandCreator] ASC,
+         [DepositGroup] ASC
+
