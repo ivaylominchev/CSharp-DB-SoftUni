@@ -36,3 +36,11 @@ ORDER BY AVG([MagicWandSize]) ASC
     FROM [WizzardDeposits]
 GROUP BY [DepositGroup]
 
+--Problem 06
+  SELECT [DepositGroup],
+         SUM([DepositAmount])
+      AS [TotalSum]
+    FROM [WizzardDeposits]
+   WHERE [MagicWandCreator] = 'Ollivander family'
+GROUP BY [DepositGroup]
+
