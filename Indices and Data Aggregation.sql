@@ -146,3 +146,16 @@ SELECT SUM([Difference])
        )
     AS [HostGuestWizardTempTable]
 
+GO
+
+USE [SoftUni]
+
+GO
+--Problem 13
+  SELECT [DepartmentID],
+         SUM([Salary])
+      AS [TotalSalary]
+    FROM [Employees]
+GROUP BY [DepartmentID]
+ORDER BY [DepartmentID] ASC
+
