@@ -202,3 +202,19 @@ SELECT COUNT(*)
   FROM [Employees]
  WHERE [ManagerID] IS NULL
 
+ --Problem 18
+  SELECT [DepartmentID],
+         [Salary]
+      AS [ThirdHighestSalary]
+    FROM (
+          SELECT [DepartmentID],
+                 [Salary],
+                 DENSE_RANK() OVER(PARTITION BY [DepartmentID] ORDER BY [Salary] DESC)
+              AS [Salary Rank]
+            FROM [Employees]
+         )
+      AS [DepartmentSalaryRank]
+   WHERE [Salary Rank] = 3
+GROUP BY [DepartmentID],
+         [Salary]
+
