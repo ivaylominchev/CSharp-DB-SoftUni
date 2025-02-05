@@ -99,3 +99,22 @@ SELECT [FirstName],
        [dbo].[ufn_GetSalaryLevel]([Salary])
     AS [Salary Level]
   FROM [Employees]
+
+GO
+ --Problem 06
+   CREATE
+       OR
+    ALTER
+PROCEDURE [dbo].[usp_EmployeesBySalaryLevel] @LevelOfSalary VARCHAR(10)
+       AS (
+             SELECT [FirstName],
+                    [LastName]
+               FROM [Employees]
+              WHERE [dbo].[ufn_GetSalaryLevel]([Salary]) = @LevelOfSalary
+          )
+
+GO
+
+EXEC [dbo].[usp_EmployeesBySalaryLevel] 'High'
+
+GO
