@@ -37,9 +37,12 @@ PROCEDURE [dbo].[usp_GetTownsStartingWith] @string VARCHAR(50)
            SELECT [Name]
                AS [Town]
              FROM [Towns]
-            WHERE SUBSTRING([Name], 1 , LEN(@string)) = @string
+            WHERE [Name] LIKE @string + '%'
+          --WHERE SUBSTRING([Name], 1 , LEN(@string)) = @string
           )
 
 GO
 
-EXEC [dbo].[usp_GetTownsStartingWith] 'nev'
+EXEC [dbo].[usp_GetTownsStartingWith] 'b'
+
+--Problem 04
