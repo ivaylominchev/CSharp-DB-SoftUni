@@ -238,3 +238,20 @@ GO
 EXEC [dbo].[usp_GetHoldersWithBalanceHigherThan] 40000
 
 GO
+
+--Problem 11
+  CREATE
+      OR
+   ALTER
+FUNCTION [dbo].[ufn_CalculateFutureValue](@initialSum DECIMAL(20,4), @interestRate FLOAT, @years INT)
+ RETURNS DECIMAL(20,4)
+      AS
+   BEGIN
+         DECLARE @futureValue DECIMAL(20,4);
+             SET @futureValue = @initialSum * (POWER((1 + @interestRate), @years));
+          RETURN @futureValue
+     END
+GO
+
+SELECT [dbo].[ufn_CalculateFutureValue](1000, 0.1, 5)
+
