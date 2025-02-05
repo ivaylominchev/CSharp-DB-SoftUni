@@ -285,3 +285,33 @@ GO
 EXEC [dbo].[usp_CalculateFutureValueForAccount] 1, 0.1
 
 GO
+
+USE [Diablo]
+
+GO
+
+--Problem 13
+       CREATE
+           OR
+        ALTER
+     FUNCTION [dbo].[ufn_CashInUsersGames](@gameName VARCHAR(50))
+RETURNS TABLE
+           AS
+       RETURN (
+                 SELECT SUM([Cash])
+                     AS [SumCash]
+                   FROM (
+                         SELECT [g].[Name],
+                                [ug].[Cash],
+                                ROW_NUMBER() OVER(ORDER BY [ug].[Cash] DESC)
+                             AS [Row Number]
+                           FROM [Games]
+                             AS [g]
+                      LEFT JOIN [UsersGames]
+                             AS [ug]
+                             ON [ug].[GameId] = [g].[Id]
+                          WHERE [g].[Name] = @gameName
+                        )
+                     AS [UsersGamesRowNumberTempTable]
+                  WHERE [Row Number] % 2 = 1
+              )
