@@ -211,3 +211,38 @@ PROCEDURE [dbo].[usp_GetHoldersFullName]
           )
 
 GO
+
+--Problem 10
+   CREATE
+       OR
+    ALTER
+PROCEDURE [dbo].[usp_GetHoldersWithBalanceHigherThan] @balance MONEY
+       AS
+    BEGIN
+          SELECT [FirstName]
+              AS [First Name],
+                 [LastName]
+              AS [Last Name]
+            FROM (
+                     SELECT [ah].[FirstName],
+                            [ah].[LastName],
+                            SUM([a].[Balance])
+                         AS [Sum of Balance]
+                       FROM [AccountHolders]
+                         AS [ah]
+                  LEFT JOIN [Accounts]
+                         AS [a]
+                         ON [ah].[Id] = [a].[AccountHolderId]
+                   GROUP BY [ah].[FirstName],
+                            [ah].[LastName]
+                     HAVING SUM([a].[Balance]) > @balance
+                 )
+              AS [SumOfBalanceTempTable] 
+        ORDER BY [First Name] ASC,
+                 [Last Name] ASC
+      END
+GO
+
+EXEC [dbo].[usp_GetHoldersWithBalanceHigherThan] 40000
+
+GO
