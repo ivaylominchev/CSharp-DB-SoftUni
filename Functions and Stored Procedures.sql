@@ -45,4 +45,31 @@ GO
 
 EXEC [dbo].[usp_GetTownsStartingWith] 'b'
 
+GO
+
 --Problem 04
+   CREATE
+       OR
+    ALTER 
+PROCEDURE [dbo].[usp_GetEmployeesFromTown] @townName VARCHAR(50)
+       AS (
+               SELECT [e].[FirstName]
+                   AS [First Name],
+                      [LastName]
+                   AS [Last Name]
+                 FROM [Employees]
+                   AS [e]
+            LEFT JOIN [Addresses]
+                   AS [a]
+                   ON [e].[AddressID] = [a].[AddressID]
+            LEFT JOIN [Towns]
+                   AS [t]
+                   ON [t].[TownID] = [a].[TownID]
+                WHERE [t].[Name] = @townName
+          )
+
+GO
+
+EXEC [dbo].[usp_GetEmployeesFromTown] 'Sofia'
+
+GO
