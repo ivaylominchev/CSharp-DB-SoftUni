@@ -216,30 +216,22 @@ GO
    CREATE
        OR
     ALTER
-PROCEDURE [dbo].[usp_GetHoldersWithBalanceHigherThan] @balance MONEY
+PROCEDURE [dbo].[usp_GetHoldersWithBalanceHigherThan] @balance DECIMAL(18,2)
        AS
     BEGIN
-          SELECT [FirstName]
-              AS [First Name],
-                 [LastName]
-              AS [Last Name]
-            FROM (
-                     SELECT [ah].[FirstName],
-                            [ah].[LastName],
-                            SUM([a].[Balance])
-                         AS [Sum of Balance]
-                       FROM [AccountHolders]
-                         AS [ah]
-                  LEFT JOIN [Accounts]
-                         AS [a]
-                         ON [ah].[Id] = [a].[AccountHolderId]
-                   GROUP BY [ah].[FirstName],
-                            [ah].[LastName]
-                     HAVING SUM([a].[Balance]) > @balance
-                 )
-              AS [SumOfBalanceTempTable] 
-        ORDER BY [First Name] ASC,
-                 [Last Name] ASC
+          
+              SELECT [ah].[FirstName],
+                     [ah].[LastName]
+                FROM [AccountHolders]
+                  AS [ah]
+           LEFT JOIN [Accounts]
+                  AS [a]
+                  ON [ah].[Id] = [a].[AccountHolderId]
+            GROUP BY [ah].[FirstName],
+                     [ah].[LastName]
+              HAVING SUM([a].[Balance]) > @balance     
+            ORDER BY [ah].[FirstName] ASC,
+                     [ah].[LastName] ASC
       END
 GO
 
