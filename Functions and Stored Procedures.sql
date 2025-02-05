@@ -194,3 +194,20 @@ CREATE OR ALTER PROCEDURE [dbo].[usp_DeleteEmployeesFromDepartment] @departmentI
   END
 
 GO
+
+USE [Bank]
+
+GO
+
+--Problem 09
+   CREATE
+       OR
+    ALTER
+PROCEDURE [dbo].[usp_GetHoldersFullName]
+       AS (
+            SELECT CONCAT_WS(' ', [FirstName], [LastName])
+                AS [Full Name]
+              FROM [AccountHolders]
+          )
+
+GO
