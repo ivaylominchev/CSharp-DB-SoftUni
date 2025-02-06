@@ -93,3 +93,28 @@ BEGIN
  END
 
  GO
+
+--Problem 05
+     CREATE
+         OR
+      ALTER
+  PROCEDURE [dbo].[usp_TransferMoney] @SenderId INT, @ReceiverId INT, @MoneyAmount DECIMAL(20,4)
+         AS 
+      BEGIN TRANSACTION
+             UPDATE [Accounts]
+                SET [Balance] -= ABS(@MoneyAmount)
+              WHERE [Id] = @SenderId
+             IF @@ROWCOUNT <> 1
+             BEGIN
+                  ROLLBACK
+             END
+
+             UPDATE [Accounts]
+                SET [Balance] += @MoneyAmount
+              WHERE [Id] = @ReceiverId
+             IF @@ROWCOUNT <> 1
+             BEGIN
+                  ROLLBACK
+             END
+             COMMIT
+GO
