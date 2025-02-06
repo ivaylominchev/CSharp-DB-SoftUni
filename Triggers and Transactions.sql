@@ -30,3 +30,32 @@ TRIGGER [tr_AddToLogsOnAccountUpdate]
 
 GO
 
+--Problem 02
+CREATE TABLE [NotificationEmails](
+	[Id] INT PRIMARY KEY IDENTITY NOT NULL,
+	[Recipient] VARCHAR(60) NOT NULL,
+	[Subject] NVARCHAR(100) NOT NULL,
+	[Body] NVARCHAR(200) NOT NULL
+)
+
+GO
+
+ CREATE
+     OR
+  ALTER
+TRIGGER [tr_AddToNotificationEmailsOnLogsInsert]
+     ON [Logs] 
+    FOR INSERT
+     AS 
+        INSERT INTO [NotificationEmails]([Recipient], [Subject], [Body])
+        SELECT [i].[AccountId],
+               'Balance change for account: ' + CONVERT(NVARCHAR,[i].[AccountId]),
+			   'On ' + CONVERT(NVARCHAR,GETDATE()) + ' your balance was changed from ' + CONVERT(NVARCHAR,[i].[OldSum]) +  ' to ' + CONVERT(NVARCHAR,[i].[NewSum]) + '.'
+          FROM [inserted] 
+            AS [i]
+GO
+
+UPDATE [Accounts]
+SET [Balance] = 123.12
+WHERE [Id] = 1
+
