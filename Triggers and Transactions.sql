@@ -80,3 +80,16 @@ SELECT [Id],
        [Balance]
   FROM [Accounts]
  WHERE [Id] = @AccountId
+
+ GO
+
+--Problem 04
+CREATE OR ALTER PROCEDURE [dbo].[usp_WithdrawMoney] @AccountId INT, @MoneyAmount DECIMAL(18,4)
+   AS 
+BEGIN
+       UPDATE [Accounts]
+          SET [Balance] -= ABS(@MoneyAmount)
+        WHERE [Id] = @AccountId
+ END
+
+ GO
