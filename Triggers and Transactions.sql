@@ -59,3 +59,24 @@ UPDATE [Accounts]
 SET [Balance] = 123.12
 WHERE [Id] = 1
 
+GO
+
+--Problem 03
+   CREATE
+       OR
+    ALTER
+PROCEDURE [dbo].[usp_DepositMoney] @AccountId INT, @MoneyAmount DECIMAL(18,4)
+       AS 
+    BEGIN
+          UPDATE [Accounts]
+             SET [Balance] += @MoneyAmount
+           WHERE [Id] = @AccountId
+      END
+ 
+ EXEC [dbo].[usp_DepositMoney] 1, 10
+
+SELECT [Id],
+       [AccountHolderId],
+       [Balance]
+  FROM [Accounts]
+ WHERE [Id] = @AccountId
