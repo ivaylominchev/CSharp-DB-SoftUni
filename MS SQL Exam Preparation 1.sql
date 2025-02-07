@@ -82,3 +82,12 @@ INSERT INTO [LibrariesBooks]([LibraryId], [BookId])
             (4, 42),
 			(4, 43),
             (5, 44)
+
+--Problem 03
+    UPDATE [c]
+       SET [c].[Website] = CONCAT('www.', REPLACE(LOWER([a].[Name]), ' ', ''), '.com')
+      FROM [Contacts] AS [c]
+INNER JOIN [Authors] AS [a]
+        ON [a].[ContactId] = [c].[Id]
+     WHERE [c].[Website] IS NULL
+
