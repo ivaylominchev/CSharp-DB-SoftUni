@@ -238,3 +238,26 @@ INNER JOIN [Brands]
      WHERE [u].[PhoneNumber] LIKE '%345%'
   ORDER BY [s].[Model] ASC
 
+GO
+
+--Problem 11
+CREATE FUNCTION [dbo].[udf_OrdersByEmail](@email NVARCHAR(100))
+RETURNS INT
+AS
+ BEGIN
+       DECLARE @result INT
+       SELECT @result = COUNT(*)
+                       FROM [Orders]
+                         AS [o]
+                 INNER JOIN [Users]
+                         AS [u]
+                         ON [o].[UserId] = [u].[Id]
+                      WHERE [u].[Email] = @email
+    RETURN @result      
+ END
+
+ GO
+
+ SELECT [dbo].[udf_OrdersByEmail]('sstewart@example.com')
+
+ GO
