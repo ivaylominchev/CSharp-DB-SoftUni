@@ -148,3 +148,29 @@ INNER JOIN [Genres]
   ORDER BY [g].[Name] ASC,
            [b].[Title] ASC
 
+--Problem 07
+   SELECT [L].[Name]
+       AS [Library],
+          [c].[Email]
+     FROM [Libraries]
+       AS [L]
+LEFT JOIN [Contacts]
+       AS [c]
+       ON [L].[ContactId] = [c].[Id] 
+    WHERE [L].[Id] NOT IN (
+                            SELECT [LB].[LibraryId]
+                              FROM [LibrariesBooks]
+                                AS [LB]
+                         LEFT JOIN [Books]
+                                AS [b]
+                                ON [LB].[BookId] = [b].[Id]
+                             WHERE [b].[GenreId] IN (
+                                                     SELECT [Id]
+                                                       FROM [Genres]
+                                                      WHERE [Name] = 'Mystery'
+                                                    )
+                          )
+ GROUP BY [L].[Name],
+          [c].[Email]
+ ORDER BY [L].[Name] ASC
+
