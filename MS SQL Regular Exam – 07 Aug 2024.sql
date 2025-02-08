@@ -207,3 +207,34 @@ INNER JOIN [Brands]
     HAVING COUNT([si].[Id]) > 5
   ORDER BY [s].[Model] DESC
 
+--Problem 10
+    SELECT [u].[FullName],
+           [u].[PhoneNumber],
+           [s].[Price]
+        AS [OrderPrice],
+           [s].[Id]
+        AS [ShoeId],
+           [b].[Id]
+        AS [BrandId],
+           CONCAT_WS('/', CONCAT([si].[EU], 'EU'), CONCAT([si].[US], 'US'), CONCAT([si].[UK], 'UK'))
+        AS [ShoeSize]
+      FROM [Orders]
+        AS [o]
+INNER JOIN [Users]
+        AS [u]
+        ON [o].[UserId] = [u].[Id]
+INNER JOIN [Shoes]
+        AS [s]
+        ON [o].[ShoeId] = [s].[Id]
+INNER JOIN [ShoesSizes]
+        AS [ss]
+        ON [s].[Id] = [ss].[ShoeId] AND [ss].[SizeId] = [o].[SizeId] 
+INNER JOIN [Sizes] 
+        AS [si]
+        ON [ss].[SizeId] = [si].[Id]
+INNER JOIN [Brands]
+        AS [b]
+        ON [s].[BrandId] = [b].[Id]
+     WHERE [u].[PhoneNumber] LIKE '%345%'
+  ORDER BY [s].[Model] ASC
+
