@@ -90,3 +90,12 @@ INSERT INTO [Orders]([ShoeId], [SizeId], [UserId])
             (74, 4, 7),
             (75, 1, 11)
 
+--Problem 03
+UPDATE [Shoes]
+   SET [Price] *= 1.15
+ WHERE [BrandId] IN (
+                       SELECT [Id]
+                         FROM [Brands]
+                        WHERE [Name] = 'Nike'
+                    )
+
