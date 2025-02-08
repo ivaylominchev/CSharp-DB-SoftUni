@@ -235,3 +235,25 @@ INNER JOIN [Authors]
      WHERE [g].[Name] LIKE 'Fiction' AND [c].[PostAddress] LIKE '%Denver%'
   ORDER BY [b].[Title] ASC
 
+GO
+--Problem 11
+CREATE FUNCTION [dbo].[udf_AuthorsWithBooks](@name NVARCHAR(100))
+RETURNS INT
+AS
+  BEGIN
+        DECLARE @result INT;
+         SELECT @result = COUNT(*)
+                     FROM [Books] 
+                       AS [b]
+               INNER JOIN [Authors]
+                       AS [a]
+                       ON [b].[AuthorId] = [a].[Id]
+                    WHERE [a].[Name] = @name
+       RETURN @result
+  END
+
+GO
+
+SELECT dbo.udf_AuthorsWithBooks('J.K. Rowling')
+
+GO
