@@ -132,3 +132,16 @@ INNER JOIN [Shoes]
   ORDER BY [s].[Price] DESC,
            [s].[Model] ASC
 
+--Problem 06
+    SELECT [b].[Name]
+        AS [BrandName],
+           [s].[Model]
+        AS [ShoeModel]
+      FROM [Shoes]
+        AS [s]
+INNER JOIN [Brands]
+        AS [b]
+        ON [s].[BrandId] = [b].[Id]
+  ORDER BY [b].[Name] ASC,
+           [s].[Model] ASC
+
