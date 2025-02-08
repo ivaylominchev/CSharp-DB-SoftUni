@@ -184,3 +184,26 @@ INNER JOIN [Shoes]
     HAVING COUNT(*) > 2
   ORDER BY [AvgPrice] DESC
 
+--Problem 09
+    SELECT [s].[Model],
+           COUNT([si].[Id])
+        AS [CountOfSizes],
+           [b].[Name]
+        AS [BrandName]
+      FROM [Shoes]
+        AS [s]
+INNER JOIN [ShoesSizes]
+        AS [ss]
+        ON [s].[Id] = [ss].[ShoeId]
+INNER JOIN [Sizes]
+        AS [si]
+        ON [ss].[SizeId] = [si].[Id]
+INNER JOIN [Brands]
+        AS [b]
+        ON [s].[BrandId] = [b].[Id]
+     WHERE [b].[Name] = 'Nike' AND [s].[Model] LIKE '%Run%'
+  GROUP BY [s].[Model],
+           [b].[Name]
+    HAVING COUNT([si].[Id]) > 5
+  ORDER BY [s].[Model] DESC
+
