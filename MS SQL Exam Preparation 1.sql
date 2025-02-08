@@ -207,3 +207,31 @@ INNER JOIN [Contacts]
      WHERE [c].[PostAddress] LIKE '%UK%'
   ORDER BY [a].[Name] ASC
 
+--Problem 10
+    SELECT [a].[Name]
+        AS [Author],
+           [b].[Title],
+           [L].[Name]
+        AS [Library],
+           [c].[PostAddress]
+        AS [Library Address]
+      FROM [Books]
+        AS [b]
+INNER JOIN [Genres]
+        AS [g]
+        ON [b].[GenreId] = [g].[Id]
+INNER JOIN [LibrariesBooks]
+        AS [LB]
+        ON [b].[Id] = [LB].[BookId]
+INNER JOIN [Libraries]
+        AS [L]
+        ON [LB].[LibraryId] = [L].[Id]
+INNER JOIN [Contacts]
+        AS [c]
+        ON [L].[ContactId] = [c].[Id]
+INNER JOIN [Authors]
+        AS [a]
+        ON [b].[AuthorId] = [a].[Id] 
+     WHERE [g].[Name] LIKE 'Fiction' AND [c].[PostAddress] LIKE '%Denver%'
+  ORDER BY [b].[Title] ASC
+
