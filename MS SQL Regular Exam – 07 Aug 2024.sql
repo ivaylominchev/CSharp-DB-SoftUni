@@ -166,3 +166,21 @@ INNER JOIN [Shoes]
   ORDER BY [TotalSpent] DESC,
            [u].[FullName] ASC
 
+--Problem 08
+    SELECT [u].[Username],
+           [u].[Email],
+           CONVERT(DECIMAL(10, 2), AVG([s].[Price]))
+        AS [AvgPrice]
+      FROM [Orders]
+        AS [o]
+INNER JOIN [Users]
+        AS [u]
+        ON [o].[UserId] = [u].[Id]
+INNER JOIN [Shoes]
+        AS [s]
+        ON [o].[ShoeId] = [s].[Id]
+  GROUP BY [u].[Username],
+           [u].[Email]
+    HAVING COUNT(*) > 2
+  ORDER BY [AvgPrice] DESC
+
