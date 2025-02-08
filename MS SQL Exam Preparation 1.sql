@@ -91,3 +91,36 @@ INNER JOIN [Authors] AS [a]
         ON [a].[ContactId] = [c].[Id]
      WHERE [c].[Website] IS NULL
 
+
+--Problem 04
+DELETE
+  FROM [LibrariesBooks]
+ WHERE [BookId] IN (
+                    SELECT [Id]
+                      FROM [Books]
+                     WHERE [AuthorId] IN (
+                                         SELECT [Id]
+                                           FROM [Authors]
+                                          WHERE [Name] = 'Alex Michaelides'
+                                         )
+                  )
+
+DELETE
+  FROM [Books]
+ WHERE [AuthorId] IN (
+                      SELECT [Id]
+                        FROM [Authors]
+                       WHERE [Name] = 'Alex Michaelides'
+					  )
+
+DELETE
+  FROM [Authors]
+ WHERE [Name] = 'Alex Michaelides'
+
+--    SELECT [b].[Id]
+--      FROM [Books] AS [b]
+--INNER JOIN [Authors] AS [a]
+--        ON [b].[AuthorId] = [a].[Id]
+--     WHERE [a].[Name] = 'Alex Michaelides'
+
+ 
