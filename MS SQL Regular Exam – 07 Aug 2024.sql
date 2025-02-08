@@ -120,3 +120,15 @@ DELETE
   FROM [Shoes]
  WHERE [Model] = 'Joyride Run Flyknit'
 
+--Problem 05
+    SELECT [s].[Model]
+        AS [ShoeModel],
+           [s].[Price]
+      FROM [Orders]
+        AS [o]
+INNER JOIN [Shoes]
+        AS [s]
+        ON [o].[ShoeId] = [s].[Id]
+  ORDER BY [s].[Price] DESC,
+           [s].[Model] ASC
+
