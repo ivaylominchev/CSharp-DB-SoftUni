@@ -282,3 +282,40 @@ AS
        ORDER BY [b].[Title] ASC
  END
 
+GO
+
+ --Problem 13
+CREATE FUNCTION [dbo].[udf_GenreFilter](@genre NVARCHAR(30))
+RETURNS TABLE
+AS 
+ RETURN (
+            SELECT [b].[Id]
+                AS [BookId],
+                   [b].[Title],
+                   [b].[YearPublished],
+                   [b].[ISBN],
+                   [a].[Name]
+                AS [Author],
+                   [L].[Name]
+                AS [Library]
+              FROM [Books] 
+                AS [b]
+        INNER JOIN [Genres]
+                AS [g]
+                ON [b].[GenreId] = [g].[Id]
+        INNER JOIN [Authors]
+                AS [a]
+                ON [b].[AuthorId] = [a].[Id]
+        INNER JOIN [LibrariesBooks]
+                AS [LB]
+                ON [b].[Id] = [LB].[BookId]
+        INNER JOIN [Libraries]
+                AS [L]
+                ON [LB].[LibraryId] = [L].[Id]
+             WHERE [g].[Name] = @genre
+        )
+
+GO
+
+SELECT * 
+  FROM [dbo].[udf_GenreFilter]('Fiction')
