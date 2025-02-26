@@ -165,3 +165,17 @@ INNER JOIN [Leagues]
 ORDER BY [TotalGoals] DESC,
          [MatchDate] ASC
 
+--Problem 06
+    SELECT [p].[Name],
+           [t].[City]
+      FROM [Players] 
+        AS [p]
+INNER JOIN [PlayersTeams] 
+        AS [pt]
+        ON [p].[Id] = [pt].[PlayerId]
+INNER JOIN [Teams] 
+        AS [t]
+        ON [pt].[TeamId] = [t].[Id]
+     WHERE [p].[Name] LIKE '%Aaron%'
+  ORDER BY [p].[Name] ASC
+
