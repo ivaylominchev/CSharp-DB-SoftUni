@@ -290,3 +290,24 @@ RETURNS TABLE AS
 
 GO
 
+--Problem 12
+CREATE PROCEDURE [dbo].[usp_SearchTeamsByCity] @cityName NVARCHAR(50)
+AS 
+ BEGIN
+       SELECT [t].[Name] 
+           AS [TeamName],
+              [L].[Name] 
+           AS [LeagueName],
+              [t].[City]
+         FROM [Teams] 
+           AS [t]
+   INNER JOIN [Leagues] 
+           AS [L]
+           ON [t].[LeagueId] = [L].[Id]
+        WHERE [t].[City] = @cityName
+     ORDER BY [t].[Name] ASC
+ END
+
+GO 
+
+EXEC usp_SearchTeamsByCity 'London'
