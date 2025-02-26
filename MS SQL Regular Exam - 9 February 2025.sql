@@ -84,3 +84,16 @@ INSERT INTO [TeamStats]([TeamId], [Wins], [Draws], [Losses])
      VALUES (97, 15, 1, 3),
             (98, 14, 3, 2)
 
+--Problem 03
+    UPDATE [ps]
+       SET [ps].[Goals] += 1
+      FROM [PlayerStats] AS [ps]
+INNER JOIN [Players] AS [p]
+        ON [ps].[PlayerId] = [p].[Id]
+INNER JOIN [PlayersTeams] AS [pt]
+        ON [p].[Id] = [pt].[PlayerId]
+INNER JOIN [Teams] AS [t]
+        ON [t].[Id] = [pt].[TeamId]
+INNER JOIN [Leagues] AS [L]
+        ON [t].[LeagueId] = [L].[Id]
+     WHERE [p].[Position] = 'Forward' AND [L].[Name] = 'La Liga'
