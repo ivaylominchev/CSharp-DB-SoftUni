@@ -97,3 +97,59 @@ INNER JOIN [Teams] AS [t]
 INNER JOIN [Leagues] AS [L]
         ON [t].[LeagueId] = [L].[Id]
      WHERE [p].[Position] = 'Forward' AND [L].[Name] = 'La Liga'
+
+--Problem 04
+DELETE
+  FROM [PlayerStats]
+ WHERE [PlayerId] IN (
+                      SELECT [p].[Id]
+                        FROM [Players] 
+                          AS [p]
+                  INNER JOIN [PlayersTeams] 
+                          AS [pt] 
+                          ON [pt].[PlayerId] = [p].[Id]
+                  INNER JOIN [Teams] 
+                          AS [t]
+                          ON [pt].[TeamId] = [t].[Id]
+                  INNER JOIN [Leagues] 
+                          AS [L]
+                          ON [t].[LeagueId] = [L].[Id]
+                       WHERE [L].[Name] = 'Eredivisie' AND [p].[Name] IN ('Luuk de Jong', 'Josip Sutalo')
+);
+
+DELETE 
+  FROM [PlayersTeams]
+ WHERE [PlayerId] IN (
+                      SELECT P.[Id]
+                        FROM [Players] 
+                          AS [p]
+                  INNER JOIN [PlayersTeams] 
+                          AS [pt]
+                          ON [pt].[PlayerId] = [p].[Id]
+                  INNER JOIN [Teams]
+                          AS [t]
+                          ON [pt].[TeamId] = [t].[Id]
+                  INNER JOIN [Leagues]
+                          AS [L]
+                          ON [t].[LeagueId] = [L].[Id]
+                       WHERE [L].[Name] = 'Eredivisie' AND [p].[Name] IN ('Luuk de Jong', 'Josip Sutalo')
+);
+
+    DELETE [p]
+      FROM [Players] 
+        AS [p]
+INNER JOIN [PlayersTeams] 
+        AS [pt] 
+        ON [pt].[PlayerId] = [p].[Id]
+INNER JOIN [Teams] 
+        AS [t] 
+        ON [pt].[TeamId] = [t].[Id]
+INNER JOIN [Leagues] 
+        AS [L] 
+        ON [t].[LeagueId] = [L].[Id]
+ LEFT JOIN [PlayerStats] 
+        AS [ps] 
+        ON [ps].[PlayerId] = [p].[Id]
+     WHERE [L].[Name] = 'Eredivisie'
+       AND [p].[Name] IN ('Luuk de Jong', 'Josip Sutalo');
+
