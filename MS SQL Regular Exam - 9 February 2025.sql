@@ -194,3 +194,29 @@ INNER JOIN [Teams]
      WHERE [t].[City] = 'London'
   ORDER BY [p].[Name] ASC
 
+--Problem 08
+    SELECT
+       TOP (10)
+           [t].[Name]
+        AS [HomeTeamName],
+           [t2].[Name]
+        AS [AwayTeamName],
+           [L].[Name]
+        AS [LeagueName],
+           FORMAT([m].[MatchDate], 'yyyy-MM-dd')
+        AS [MatchDate]
+      FROM [Matches]
+        AS [m]
+INNER JOIN [Teams]
+        AS [t]
+        ON [m].[HomeTeamId] = [t].[Id]
+INNER JOIN [Teams]
+        AS [t2]
+        ON [t2].[Id] = [m].[AwayTeamId]
+INNER JOIN [Leagues]
+        AS [L]
+        ON [L].[Id] = [t].[LeagueId]
+     WHERE [m].[MatchDate] BETWEEN '2024-09-01' AND '2024-09-15' AND [L].[Id] % 2 = 0
+  ORDER BY [m].[MatchDate] ASC,
+           [HomeTeamName] ASC
+
