@@ -255,3 +255,38 @@ INNER JOIN [Leagues]
 
 GO
 
+--Problem 11
+CREATE FUNCTION [dbo].[udf_LeagueTopScorer](@nameLeague NVARCHAR(50))
+RETURNS TABLE AS
+ RETURN (
+         SELECT [PlayerName],
+                [TotalGoals]
+           FROM (
+                  SELECT [p].[Name] 
+                      AS [PlayerName],
+                         [ps].[Goals] 
+                      AS [TotalGoals],
+                         DENSE_RANK() OVER(PARTITION BY [L].[Id] ORDER BY [ps].[Goals] DESC)
+                      AS [RANKS]
+                    FROM [Players] 
+                      AS [p]
+              INNER JOIN [PlayerStats] 
+                      AS [ps]
+                      ON [p].[Id] = [ps].[PlayerId]
+              INNER JOIN [PlayersTeams] 
+                      AS [pt]
+                      ON [p].[Id] = [pt].[PlayerId]
+              INNER JOIN [Teams] 
+                      AS [t]
+                      ON [pt].[TeamId] = [t].[Id]
+              INNER JOIN [Leagues] 
+                      AS [L]
+                      ON [L].[Id] = [t].[LeagueId]
+                   WHERE [L].[Name] = @nameLeague
+                )
+             AS [RankingTempTable]
+          WHERE [RANKS] = '1'
+       )
+
+GO
+
