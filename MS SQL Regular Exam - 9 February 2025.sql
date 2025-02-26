@@ -240,3 +240,18 @@ INNER JOIN [Teams]
   ORDER BY [TotalAwayGoals] DESC,
            [t].[Name] ASC
 
+--Problem 10
+    SELECT [L].[Name]
+        AS [LeagueName],
+           ROUND(AVG(CAST(([m].[HomeTeamGoals] + [m].[AwayTeamGoals]) AS FLOAT)), 2)
+        AS [AvgScoringRate]
+      FROM [Matches]
+        AS [m]
+INNER JOIN [Leagues]
+        AS [L]
+        ON [m].[LeagueId] = [L].[Id]
+  GROUP BY [L].[Name]
+  ORDER BY [AvgScoringRate] DESC
+
+GO
+
